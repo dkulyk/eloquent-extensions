@@ -40,7 +40,7 @@ trait HasDefaults
      */
     public function getDefaultsColumn(): string
     {
-        return defined('static::ENABLED') ? static::ENABLED : 'enabled';
+        return 'default';
     }
 
     /**
