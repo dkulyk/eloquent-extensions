@@ -1,0 +1,30 @@
+{
+    "name": "b2b/eloquent-extensions",
+    "description": "Eloquent extensions",
+    "authors": [
+        {
+            "name": "Dmytro Kulyk",
+            "email": "lnkvisitor.ts@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "illuminate/database": "^5.5",
+        "b2b/factory": "^1.0"
+    },
+    "suggest": {
+        "myclabs/php-enum": "Use for enums casting."
+    },
+    "autoload": {
+        "psr-4": {
+            "B2B\\Eloquent\\Extensions\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "B2B\\Eloquent\\Extensions\\ServiceProvider"
+            ]
+        }
+    }
+}
