@@ -66,9 +66,9 @@ trait HasDefaults
      *
      * @return static
      */
-    protected function setDefaultAttribute(bool $value): self
+    protected function setDefaultAttribute($value): self
     {
-        $this->attributes[$this->getDefaultsColumn()] = $value;
+        $this->attributes[$this->getDefaultsColumn()] = (bool)$value;
 
         return $this;
     }
