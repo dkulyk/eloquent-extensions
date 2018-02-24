@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace B2B\Eloquent\Extensions\Concerns;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\Relation;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -15,38 +15,48 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 trait HasImmutable
 {
     use SoftDeletes;
-    private static $immutableForEntities = [];
 
     /**
-     * @param string $class
+     * Get immutable fields.
      *
-     * @return void
+     * @return array|null
      */
-    public static function immutableFor(string $class)
+    public function getImmutable(): ?array
     {
-        $morphMap = Relation::morphMap();
-
-        if (!empty($morphMap) && \in_array($class, $morphMap, true)) {
-            /** @noinspection CallableParameterUseCaseInTypeContextInspection */
-            $class = \array_search($class, $morphMap, true);
-        }
-        self::$immutableForEntities[] = $class;
+        return \property_exists($this, 'immutable') ? (array) $this->immutable : null;
     }
 
     /**
-     * @param Builder $query
+     * Set immutable fields.
      *
-     * @return bool
+     * @param array $immutable
+     *
+     * @return static
      */
-    protected function performUpdate(Builder $query): bool
+    public function setImmutable(array $immutable): self
     {
-        if (\in_array($this->entity_type, self::$immutableForEntities, true)) {
-            $this->delete();
-            $this->{$this->getKeyName()} = null;
-            $this->{$this->getDeletedAtColumn()} = null;
-            return $this->performInsert($query);
+        if (!\property_exists($this, 'immutable')) {
+            throw new \RuntimeException('Immutable not supported.');
         }
+        $this->immutable = $immutable;
 
-        return parent::performUpdate($query);
+        return $this;
+    }
+
+    public static function bootHasImmutable(): void
+    {
+        static::saving(function (Model $model) {
+            /* @var Model|HasImmutable $model */
+            $immutable = $model->getImmutable();
+            if ($immutable === null) {
+                return;
+            }
+
+            if ($model->isDirty($immutable)) {
+                $model->newQueryWithoutScopes()->update('deleted_at', $model->serializeDate(Carbon::now()));
+                $model->setAttribute($model->getKeyName(), null);
+                $model->exists = false;
+            }
+        });
     }
 }
