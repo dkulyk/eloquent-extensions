@@ -23,7 +23,7 @@ trait HasImmutable
      */
     public function getImmutable(): ?array
     {
-        return \property_exists($this, 'immutable') ? (array) $this->immutable : null;
+        return \property_exists($this, 'immutable') ? (array)$this->immutable : null;
     }
 
     /**
@@ -46,6 +46,9 @@ trait HasImmutable
     public static function bootHasImmutable(): void
     {
         static::saving(function (Model $model) {
+            if (!$model->exists) {
+                return;
+            }
             /* @var Model|HasImmutable $model */
             $immutable = $model->getImmutable();
             if ($immutable === null) {
@@ -53,7 +56,9 @@ trait HasImmutable
             }
 
             if ($model->isDirty($immutable)) {
-                $model->newQueryWithoutScopes()->update('deleted_at', $model->serializeDate(Carbon::now()));
+                $model->newQueryWithoutScopes()
+                    ->whereKey($model->getKey())
+                    ->update(['deleted_at' => $model->serializeDate(Carbon::now())]);
                 $model->setAttribute($model->getKeyName(), null);
                 $model->exists = false;
             }
