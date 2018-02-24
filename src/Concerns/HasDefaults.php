@@ -68,7 +68,7 @@ trait HasDefaults
      */
     protected function setDefaultAttribute($value): self
     {
-        $this->attributes[$this->getDefaultsColumn()] = (bool)$value;
+        $this->attributes[$this->getDefaultsColumn()] = (bool) $value;
 
         return $this;
     }
@@ -86,6 +86,6 @@ trait HasDefaults
      */
     protected function unsetDefaultsQuery(): Builder
     {
-        return $this->newQuery();
+        return $this->newQueryWithoutScopes();
     }
 }
