@@ -13,7 +13,7 @@
         "b2b/factory": "^1.0"
     },
     "suggest": {
-        "myclabs/php-enum": "Use for enums casting."
+        "b2b/enum": "Use for enums casting."
     },
     "autoload": {
         "psr-4": {
