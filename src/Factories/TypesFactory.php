@@ -80,3 +80,5 @@ final class TypesFactory
             : $value;
     }
 }
+
+class_alias(TypesFactory::class, 'B2B\Eloquent\Extensions\Factories\TypesFactory');
