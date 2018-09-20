@@ -9,6 +9,7 @@ namespace Illuminate\Database\Eloquent {
      * @package Illuminate\Database\Eloquent
      * @method static withDisabled()
      * @method static withoutDisabled()
+     * @method static onlyDisabled()
      * @method static withTrashed()
      * @method static withoutTrashed()
      * @method static onlyTrashed()

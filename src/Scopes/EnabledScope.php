@@ -90,5 +90,12 @@ class EnabledScope implements Scope
 
             return $builder->withoutGlobalScope($this)->where($model->getQualifiedEnabledColumn(), true);
         });
+
+        $builder->macro('onlyDisabled', function (Builder $builder) {
+            /* @var HasEnabled $model */
+            $model = $builder->getModel();
+
+            return $builder->withoutGlobalScope($this)->where($model->getQualifiedEnabledColumn(), false);
+        });
     }
 }

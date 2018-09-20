@@ -16,6 +16,18 @@ use Illuminate\Support\Str;
  */
 trait HasTypes
 {
+
+    /**
+     * Determine if the cast type is a custom date time cast.
+     *
+     * @param  string  $cast
+     * @return bool
+     */
+    protected function isCustomDateTimeCast($cast)
+    {
+        return !is_array($cast) && parent::isCustomDateTimeCast($cast);
+    }
+
     /**
      * Get the type of cast for a model attribute.
      *
