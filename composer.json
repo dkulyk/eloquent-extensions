@@ -1,5 +1,5 @@
 {
-    "name": "b2b/eloquent-extensions",
+    "name": "dkulyk/eloquent-extensions",
     "description": "Eloquent extensions",
     "authors": [
         {
@@ -17,13 +17,13 @@
     },
     "autoload": {
         "psr-4": {
-            "B2B\\Eloquent\\Extensions\\": "src/"
+            "DKulyk\\Eloquent\\Extensions\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "B2B\\Eloquent\\Extensions\\ServiceProvider"
+                "DKulyk\\Eloquent\\Extensions\\ServiceProvider"
             ]
         }
     }

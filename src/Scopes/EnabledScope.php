@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace B2B\Eloquent\Extensions\Scopes;
+namespace DKulyk\Eloquent\Extensions\Scopes;
 
-use B2B\Eloquent\Extensions\Concerns\HasEnabled;
+use DKulyk\Eloquent\Extensions\Concerns\HasEnabled;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;

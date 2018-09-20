@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace B2B\Eloquent\Extensions\Concerns;
+namespace DKulyk\Eloquent\Extensions\Concerns;
 
-use B2B\Eloquent\Extensions\Scopes\EnabledScope;
+use DKulyk\Eloquent\Extensions\Scopes\EnabledScope;
 
 /**
  * Trait HasEnabled

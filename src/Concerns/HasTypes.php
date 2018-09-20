@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace B2B\Eloquent\Extensions\Concerns;
+namespace DKulyk\Eloquent\Extensions\Concerns;
 
-use B2B\Eloquent\Extensions\Facades\Types;
+use DKulyk\Eloquent\Extensions\Facades\Types;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection as BaseCollection;
 use Illuminate\Support\Str;

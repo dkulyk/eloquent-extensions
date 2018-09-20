@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace B2B\Eloquent\Extensions\Factories;
+namespace DKulyk\Eloquent\Extensions\Factories;
 
 use Psr\Container\ContainerInterface;
 use Closure;

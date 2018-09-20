@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace B2B\Eloquent\Extensions\Facades;
+namespace DKulyk\Eloquent\Extensions\Facades;
 
-use B2B\Eloquent\TypeCasting\Factory;
+use DKulyk\Eloquent\TypeCasting\Factory;
 use Closure;
 use Illuminate\Support\Facades\Facade;
 

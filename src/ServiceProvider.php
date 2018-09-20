@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace B2B\Eloquent\Extensions;
+namespace DKulyk\Eloquent\Extensions;
 
-use B2B\Eloquent\Extensions\Factories\TypesFactory;
+use DKulyk\Eloquent\Extensions\Factories\TypesFactory;
 
 /**
  * Class ServiceProvider

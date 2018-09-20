@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace B2B\Eloquent\Extensions\Concerns;
+namespace DKulyk\Eloquent\Extensions\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;

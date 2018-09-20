@@ -1,9 +1,8 @@
 <?php
 declare(strict_types=1);
 
-namespace B2B\Eloquent\Extensions\Concerns;
+namespace DKulyk\Eloquent\Extensions\Concerns;
 
-use Carbon\Carbon;
 use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;

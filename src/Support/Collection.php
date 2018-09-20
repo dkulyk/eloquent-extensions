@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace B2B\Eloquent\Extensions\Support;
+namespace DKulyk\Eloquent\Extensions\Support;
 
 use Illuminate\Support\Collection as BaseCollection;
 

@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
-namespace B2B\Eloquent\Extensions\Concerns;
+namespace DKulyk\Eloquent\Extensions\Concerns;
 
-use B2B\Eloquent\Extensions\Support\Collection;
+use DKulyk\Eloquent\Extensions\Support\Collection;
 use InvalidArgumentException;
 
 /**
