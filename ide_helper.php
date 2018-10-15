@@ -7,13 +7,14 @@ namespace Illuminate\Database\Eloquent {
      * Class Builder
      *
      * @package Illuminate\Database\Eloquent
-     * @method static withDisabled()
-     * @method static withoutDisabled()
-     * @method static onlyDisabled()
-     * @method static withTrashed()
-     * @method static withoutTrashed()
-     * @method static onlyTrashed()
+     * @method $this withDisabled()
+     * @method $this withoutDisabled()
+     * @method $this onlyDisabled()
+     * @method $this withTrashed()
+     * @method $this withoutTrashed()
+     * @method $this onlyTrashed()
      * @method static restore()
+     * @method $this legacyHas($relation, $operator = '>=', $count = 1, $boolean = 'and', \Closure $callback = null)
      */
     class Builder
     {
@@ -23,15 +24,15 @@ namespace Illuminate\Database\Eloquent {
 namespace Illuminate\Support {
 
     /**
-     * @method static nullable()
-     * @method static unique()
-     * @method static index()
-     * @method static default($value)
-     * @method static references(string $field)
-     * @method static on(string $table)
-     * @method static onUpdate(string $action)
-     * @method static onDelete(string $action)
-     * @method static after(string $field)
+     * @method $this nullable()
+     * @method $this unique()
+     * @method $this index()
+     * @method $this default($value)
+     * @method $this references(string $field)
+     * @method $this on(string $table)
+     * @method $this onUpdate(string $action)
+     * @method $this onDelete(string $action)
+     * @method $this after(string $field)
      */
     class Fluent
     {
