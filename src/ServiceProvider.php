@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace DKulyk\Eloquent\Extensions;
 
+use DKulyk\Eloquent\Extensions\Concerns\HasEnabled;
 use DKulyk\Eloquent\Extensions\Concerns\HasTypes;
 use DKulyk\Eloquent\Extensions\Factories\TypesFactory;
 use DKulyk\Eloquent\Extensions\Nova\Filters\EnabledFilter;
@@ -60,6 +61,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             });
 
         Event::listen(ResolveFiltersEvent::class, function (ResolveFiltersEvent $event) {
+            if (!in_array(HasEnabled::class, trait_uses_recursive($event->getResource()->resource), true)) {
+                return;
+            }
+
             $filters = $event->getFilters()->whereInstanceOf(EnabledFilter::class);
             if (count($filters) === 0) {
                 $event->appendFilter(new EnabledFilter);
