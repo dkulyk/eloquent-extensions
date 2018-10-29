@@ -5,7 +5,10 @@ namespace DKulyk\Eloquent\Extensions;
 
 use DKulyk\Eloquent\Extensions\Concerns\HasTypes;
 use DKulyk\Eloquent\Extensions\Factories\TypesFactory;
+use DKulyk\Eloquent\Extensions\Nova\Filters\EnabledFilter;
+use DtKt\Nova\Events\ResolveFiltersEvent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Event;
 
 /**
  * Class ServiceProvider
@@ -55,6 +58,13 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
                     $hasQuery, $relation, $operator, $count, $boolean
                 );
             });
+
+        Event::listen(ResolveFiltersEvent::class, function (ResolveFiltersEvent $event) {
+            $filters = $event->getFilters()->whereInstanceOf(EnabledFilter::class);
+            if (count($filters) === 0) {
+                $event->appendFilter(new EnabledFilter);
+            }
+        });
     }
 }
 
