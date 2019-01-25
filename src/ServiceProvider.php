@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace DKulyk\Eloquent\Extensions;
 
+use Closure;
 use DKulyk\Eloquent\Extensions\Concerns\HasEnabled;
 use DKulyk\Eloquent\Extensions\Concerns\HasTypes;
 use DKulyk\Eloquent\Extensions\Factories\TypesFactory;
