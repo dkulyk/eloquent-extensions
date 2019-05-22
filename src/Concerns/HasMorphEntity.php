@@ -41,7 +41,7 @@ trait HasMorphEntity
 
         return $model->newQuery()
             ->whereIn($relation->getMorphType(), [$entity->getMorphClass(), get_class($entity)])
-            ->where($relation->getForeignKey(), $entity->getKey())
+            ->where($relation->getForeignKeyName(), $entity->getKey())
             ->when($callback, function (Builder $builder, Closure $callback) {
                 return $builder->where($callback);
             });
