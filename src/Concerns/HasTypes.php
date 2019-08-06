@@ -38,6 +38,7 @@ trait HasTypes
     protected function getCastType( $key): string
     {
         $type = (array) $this->getCasts()[$key];
+        
         return \trim(\strtolower($type[0]));
     }
 
@@ -61,7 +62,9 @@ trait HasTypes
             case 'real':
             case 'float':
             case 'double':
-                return (float) $value;
+                return $this->fromFloat($value);
+            case 'decimal':
+                return $this->asDecimal($value, explode(':', $this->getCasts()[$key], 2)[1]);
             case 'string':
                 return (string) $value;
             case 'bool':
@@ -77,6 +80,7 @@ trait HasTypes
             case 'date':
                 return $this->asDate($value);
             case 'datetime':
+            case 'custom_datetime':
                 return $this->asDateTime($value);
             case 'timestamp':
                 return $this->asTimestamp($value);
@@ -90,7 +94,7 @@ trait HasTypes
      *
      * @param  string  $key
      * @param  mixed  $value
-     * @return $this
+     * @return mixed
      */
     public function setAttribute($key, $value)
     {
@@ -98,9 +102,7 @@ trait HasTypes
         // which simply lets the developers tweak the attribute as it is set on
         // the model, such as "json_encoding" an listing of data for storage.
         if ($this->hasSetMutator($key)) {
-            $method = 'set'.Str::studly($key).'Attribute';
-
-            return $this->{$method}($value);
+            return $this->setMutatedAttributeValue($key, $value);
         }
 
         // If an attribute is listed as a "date", we'll convert it from a DateTime
@@ -110,7 +112,7 @@ trait HasTypes
             $value = $this->fromDateTime($value);
         }
 
-        if ($this->isJsonCastable($key) && !is_null($value)) {
+        if ($this->isJsonCastable($key) && ! is_null($value)) {
             $value = $this->castAttributeAsJson($key, $value);
         } elseif ($this->hasCast($key)) {
             $value = Types::serialize($value, ...(array) ($this->getCasts()[$key]));
