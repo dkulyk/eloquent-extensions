@@ -37,11 +37,12 @@ trait HasMorphEntity
     {
         /* @var Model $model */
         $model = new static();
+        /* @var MorphTo $relation */
         $relation = $model->entity();
 
         return $model->newQuery()
             ->whereIn($relation->getMorphType(), [$entity->getMorphClass(), get_class($entity)])
-            ->where($relation->getForeignKey(), $entity->getKey())
+            ->where($relation->getForeignKeyName(), $entity->getKey())
             ->when($callback, function (Builder $builder, Closure $callback) {
                 return $builder->where($callback);
             });
