@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Event;
 
 /**
  * Class ServiceProvider
- *
- * @package B2B\Eloquent\Extensions
  */
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
@@ -73,6 +71,3 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         });
     }
 }
-
-class_alias(TypesFactory::class, \B2B\Eloquent\Extensions\Factories\TypesFactory::class);
-class_alias(HasTypes::class, \B2B\Eloquent\Extensions\Concerns\HasTypes::class);

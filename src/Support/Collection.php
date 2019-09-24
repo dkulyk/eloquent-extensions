@@ -7,8 +7,6 @@ use Illuminate\Support\Collection as BaseCollection;
 
 /**
  * Class Collection
- *
- * @package B2B\Eloquent\Extensions\Support
  */
 class Collection extends BaseCollection
 {

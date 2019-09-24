@@ -8,7 +8,6 @@ use DKulyk\Eloquent\Extensions\Scopes\EnabledScope;
 /**
  * Trait HasEnabled
  *
- * @package B2B\Eloquent\Extensions\Concerns
  * @property bool $enabled
  */
 trait HasEnabled

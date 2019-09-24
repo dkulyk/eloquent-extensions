@@ -9,7 +9,6 @@ use Ramsey\Uuid\Uuid;
 /**
  * Trait CanUUID
  *
- * @package B2B\Eloquent\Extensions\Concerns
  * @property-read string $uuid
  */
 trait CanUUID

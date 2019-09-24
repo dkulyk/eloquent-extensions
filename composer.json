@@ -15,6 +15,9 @@
     "suggest": {
         "b2b/enum": "Use for enums casting."
     },
+    "conflict": {
+        "b2b/eloquent-extensions": "*"
+    },
     "autoload": {
         "psr-4": {
             "DKulyk\\Eloquent\\Extensions\\": "src/"

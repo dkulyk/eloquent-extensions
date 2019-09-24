@@ -11,7 +11,6 @@ use Illuminate\Support\Str;
 /**
  * Trait HasTypeCasting
  *
- * @package B2B\Eloquent\TypeCasting\Concerns
  * @mixin Model
  */
 trait HasTypes

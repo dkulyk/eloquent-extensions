@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Trait HasDefaults
  *
- * @package B2B\Eloquent\Extensions\Concerns
  * @property bool $default
  */
 trait HasDefaults

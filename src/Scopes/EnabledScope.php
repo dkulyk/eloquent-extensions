@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\Scope;
 
 /**
  * Class EnabledScope
- *
- * @package B2B\Eloquent\Extensions\Scopes
  */
 class EnabledScope implements Scope
 {

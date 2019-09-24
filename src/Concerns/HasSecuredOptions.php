@@ -8,7 +8,6 @@ use InvalidArgumentException;
 /**
  * Trait HasSecuredOptions
  *
- * @package B2B\Eloquent\Extensions\Concerns
  * @property Collection|iterable $options
  */
 trait HasSecuredOptions

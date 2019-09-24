@@ -8,8 +8,6 @@ use Closure;
 
 /**
  * Class TypesFactory
- *
- * @package B2B\Eloquent\Extensions\Factories
  */
 final class TypesFactory
 {
