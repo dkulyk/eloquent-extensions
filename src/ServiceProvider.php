@@ -22,6 +22,14 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         $this->app->singleton('eloquent.types', function ($app) {
             return new TypesFactory($app);
         });
+
+        $this->app->extend('eloquent.types', function (TypesFactory $factory) {
+            return $factory->extend('enum', function ($value, string $class) {
+                return new $class(ctype_digit($value) ? (int) $value : $value);
+            }, function ($value) {
+                return ($value instanceof \B2B\Enum\Enum || $value instanceof \DKulyk\Enum\Enum) ? $value->getValue() : (string) $value;
+            });
+        });
     }
 
     public function boot()

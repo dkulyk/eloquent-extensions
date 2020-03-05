@@ -39,7 +39,7 @@ trait HasEnabled
      */
     public function getQualifiedEnabledColumn(): string
     {
-        return "{$this->getTable()}.{$this->getEnabledColumn()}";
+        return $this->qualifyColumn($this->getEnabledColumn());
     }
 
     /**
