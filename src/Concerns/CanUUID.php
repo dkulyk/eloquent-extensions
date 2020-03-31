@@ -9,6 +9,7 @@ use Ramsey\Uuid\Uuid;
 /**
  * Trait CanUUID
  *
+ * @deprecated Use HasUUIDKey instead.
  * @property-read string $uuid
  */
 trait CanUUID

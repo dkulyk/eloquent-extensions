@@ -12,10 +12,10 @@ use Illuminate\Support\Str;
  * Trait HasTypeCasting
  *
  * @mixin Model
+ * @deprecated Laravel 7 have typecasting.
  */
 trait HasTypes
 {
-
     /**
      * Determine if the cast type is a custom date time cast.
      *
