@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DKulyk\Eloquent\Extensions\Concerns;
@@ -22,7 +23,7 @@ trait HasDefaults
     {
         static::saved(function (Model $model) {
             /* @var static $model */
-            if ($model->default) {
+            if ($model->getAttribute($model->getDefaultsColumn())) {
                 //unset other default
                 $model->unsetDefaultsQuery()
                     ->where($model->getQualifiedDefaultsColumn(), true)
@@ -30,6 +31,12 @@ trait HasDefaults
                     ->update([$model->getDefaultsColumn() => false]);
             }
         });
+    }
+
+    protected function initializeHasDefaults(): void
+    {
+        $this->fillable[] = $field = $this->getDefaultsColumn();
+        $this->casts[$field] = 'bool';
     }
 
     /**
@@ -52,32 +59,13 @@ trait HasDefaults
         return "{$this->getTable()}.{$this->getDefaultsColumn()}";
     }
 
-    /**
-     * @return bool
-     */
-    protected function getDefaultAttribute(): bool
-    {
-        return (bool) ($this->attributes[$this->getDefaultsColumn()] ?? false);
-    }
-
-    /**
-     * @param bool $value
-     *
-     * @return static
-     */
-    protected function setDefaultAttribute($value): self
-    {
-        $this->attributes[$this->getDefaultsColumn()] = (bool) $value;
-
-        return $this;
-    }
 
     /**
      * @return bool
      */
     public function isDefault(): bool
     {
-        return $this->getDefaultAttribute();
+        return (bool) $this->getAttribute($this->getDefaultAttribute());
     }
 
     /**
