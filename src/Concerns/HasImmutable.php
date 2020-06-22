@@ -58,7 +58,7 @@ trait HasImmutable
             if ($model->isDirty($immutable)) {
                 $model->newQueryWithoutScopes()
                     ->whereKey($model->getKey())
-                    ->update(['deleted_at' => $model->serializeDate(Carbon::now())]);
+                    ->delete();
                 $model->setAttribute($model->getKeyName(), null);
                 $model->exists = false;
             }
