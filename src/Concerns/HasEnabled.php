@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DKulyk\Eloquent\Extensions\Concerns;
@@ -22,6 +23,13 @@ trait HasEnabled
         static::addGlobalScope(new EnabledScope());
     }
 
+    protected function initializeHasEnabled(): void
+    {
+        $this->fillable[] = $field = $this->getEnabledColumn();
+        $this->casts[$field] = 'bool';
+
+    }
+
     /**
      * Get the name of the "deleted at" column.
      *
@@ -40,25 +48,5 @@ trait HasEnabled
     public function getQualifiedEnabledColumn(): string
     {
         return $this->qualifyColumn($this->getEnabledColumn());
-    }
-
-    /**
-     * @return bool
-     */
-    protected function getEnabledAttribute(): bool
-    {
-        return (bool) ($this->attributes[$this->getEnabledColumn()] ?? false);
-    }
-
-    /**
-     * @param $value
-     *
-     * @return static
-     */
-    protected function setEnabledAttribute($value): self
-    {
-        $this->attributes[$this->getEnabledColumn()] = (bool) $value;
-
-        return $this;
     }
 }
