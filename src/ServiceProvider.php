@@ -30,7 +30,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             return $factory->extend('enum', function ($value, string $class) {
                 return new $class(ctype_digit($value) ? (int) $value : $value);
             }, function ($value) {
-                return ( $value instanceof Enum) ? $value->getValue() : (string) $value;
+                return ($value instanceof Enum) ? $value->getValue() : (string) $value;
             });
         });
     }
