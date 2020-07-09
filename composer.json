@@ -22,7 +22,10 @@
     "autoload": {
         "psr-4": {
             "DKulyk\\Eloquent\\Extensions\\": "src/"
-        }
+        },
+        "files": [
+            "src/functions.php"
+        ]
     },
     "extra": {
         "laravel": {

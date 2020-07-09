@@ -1,16 +1,19 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DKulyk\Eloquent\Extensions;
 
 use Closure;
 use DKulyk\Eloquent\Extensions\Concerns\HasEnabled;
-use DKulyk\Eloquent\Extensions\Concerns\HasTypes;
 use DKulyk\Eloquent\Extensions\Factories\TypesFactory;
 use DKulyk\Eloquent\Extensions\Nova\Filters\EnabledFilter;
+use DKulyk\Eloquent\Extensions\Support\PendingDispatch;
 use DtKt\Nova\Events\ResolveFiltersEvent;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Event;
+use MyCLabs\Enum\Enum;
+use Illuminate\Database\Events\{TransactionBeginning, TransactionCommitted, TransactionRolledBack};
+use Illuminate\Events\Dispatcher;
 
 /**
  * Class ServiceProvider
@@ -27,12 +30,12 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             return $factory->extend('enum', function ($value, string $class) {
                 return new $class(ctype_digit($value) ? (int) $value : $value);
             }, function ($value) {
-                return ($value instanceof \B2B\Enum\Enum || $value instanceof \DKulyk\Enum\Enum) ? $value->getValue() : (string) $value;
+                return ( $value instanceof Enum) ? $value->getValue() : (string) $value;
             });
         });
     }
 
-    public function boot()
+    public function boot(Dispatcher $events)
     {
         Builder::macro(
             'legacyHas',
@@ -67,8 +70,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
                 );
             });
 
-        Event::listen(ResolveFiltersEvent::class, function (ResolveFiltersEvent $event) {
-            if (!in_array(HasEnabled::class, trait_uses_recursive($event->getResource()->resource), true)) {
+        $events->listen(ResolveFiltersEvent::class, function (ResolveFiltersEvent $event) {
+            if (! in_array(HasEnabled::class, trait_uses_recursive($event->getResource()->resource), true)) {
                 return;
             }
 
@@ -77,5 +80,9 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
                 $event->appendFilter(new EnabledFilter);
             }
         });
+
+        $events->listen(TransactionBeginning::class, fn() => PendingDispatch::onTransactionBeginning());
+        $events->listen(TransactionRolledBack::class, fn() => PendingDispatch::onTransactionRolledBack());
+        $events->listen(TransactionCommitted::class, fn() => PendingDispatch::onTransactionCommitted());
     }
 }
