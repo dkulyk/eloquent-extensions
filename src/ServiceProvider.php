@@ -20,21 +20,6 @@ use Illuminate\Events\Dispatcher;
  */
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
-    public function register(): void
-    {
-        $this->app->singleton('eloquent.types', function ($app) {
-            return new TypesFactory($app);
-        });
-
-        $this->app->extend('eloquent.types', function (TypesFactory $factory) {
-            return $factory->extend('enum', function ($value, string $class) {
-                return new $class(ctype_digit($value) ? (int) $value : $value);
-            }, function ($value) {
-                return ($value instanceof Enum) ? $value->getValue() : (string) $value;
-            });
-        });
-    }
-
     public function boot(Dispatcher $events)
     {
         Builder::macro(

@@ -9,8 +9,7 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "illuminate/database": "^7.15.0",
-        "b2b/factory": "^1.0",
+        "illuminate/database": ">=7.15.0",
         "ramsey/uuid": "^3.0 | ^4.0"
     },
     "suggest": {
