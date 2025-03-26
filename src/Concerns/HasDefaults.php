@@ -31,8 +31,8 @@ trait HasDefaults
     protected function initializeHasDefaults(): void
     {
         $field = $this->getDefaultsColumn();
-        $this->fillable[] = $field;
-        $this->casts[$field] = 'bool';
+        $this->mergeFillable([$field]);
+        $this->mergeCasts([$field => 'bool']);
     }
 
     public function getDefaultsColumn(): string

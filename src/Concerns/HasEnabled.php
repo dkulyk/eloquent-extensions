@@ -25,8 +25,9 @@ trait HasEnabled
 
     protected function initializeHasEnabled(): void
     {
-        $this->fillable[] = $field = $this->getEnabledColumn();
-        $this->casts[$field] = 'bool';
+        $field = $this->getEnabledColumn();
+        $this->mergeFillable([$field]);
+        $this->mergeCasts([$field => 'bool']);
 
     }
 

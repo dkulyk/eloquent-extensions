@@ -12,12 +12,6 @@
         "illuminate/database": ">=7.15.0",
         "ramsey/uuid": "^3.0 | ^4.0"
     },
-    "suggest": {
-        "b2b/enum": "Use for enums casting."
-    },
-    "conflict": {
-        "b2b/eloquent-extensions": "*"
-    },
     "autoload": {
         "psr-4": {
             "DKulyk\\Eloquent\\Extensions\\": "src/"
